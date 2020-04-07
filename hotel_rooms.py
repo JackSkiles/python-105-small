@@ -27,43 +27,56 @@ main_menu = '''\n
 3. check if room number is valid
 4. check if room is occupied
 '''
-# jotaro = {
-# 'name': 'Jotaro', 
-# 'phone number': 4232235840, 
-# 'has prepaid': True
-# }
+jotaro = {
+'name': 'Jotaro', 
+'phone number': 4232235840, 
+'has prepaid': True
+}
 
 # with open('bffs.json', 'r') as f2:
 #      jotaro = json.load(f2)
 
 
-# joseph = {
-# 'name': 'joseph', 
-# 'phone number': 22000, 
-# 'has prepaid?': False
-# }
+joseph = {
+'name': 'joseph', 
+'phone number': 22000, 
+'has prepaid?': False
+}
 
-# kakyoin = {
-# 'name': 'Kakyoin', 
-# 'phone number': 40203, 
-# 'has prepaid': True
-# }
+kakyoin = {
+'name': 'Kakyoin', 
+'phone number': 40203, 
+'has prepaid': True
+}
 
-# avdol = {
-# 'name': 'avdol',
-# 'phone number': 20012,
-# 'has prepaid': True
-# }
+avdol = {
+'name': 'avdol',
+'phone number': 20012,
+'has prepaid': True
+}
 
-# Polnereffe = {
-# 'name': 'Polnereffe',
-# 'phone number': 42011,
-# 'has prepaid': False
-# }
+Polnereffe = {
+'name': 'Polnereffe',
+'phone number': 42011,
+'has prepaid': False
+}
 
 # #print(hotel_rooms)
 # print(jotaro)
 # hotel_rooms['101'] = jotaro
+def name_checker(occupant_name):
+     if occupant_name == 'jotaro':
+        return jotaro
+     elif occupant_name == 'kakyoin':
+         return kakyoin
+     elif occupant_name == 'avdol':
+         return avdol
+     elif occupant_name == 'joseph':
+         return joseph
+     elif occupant_name == 'polnereffe':
+         return Polnereffe
+     else:
+         pass
 
 
 def room_vacancy(room_check):
@@ -73,7 +86,8 @@ def room_vacancy(room_check):
     else:
         return hotel_rooms.get(room_check, 'That is not a valid room entry.')
  
-
+def new_occupant(new_occupant, room_number):
+    hotel_rooms[room_number] = new_occupant
 
 
 while True:
@@ -89,7 +103,15 @@ while True:
 #         new_occupant = input('Please enter new occupant of room: ')
 #         hotel_rooms[new_room] = new_occupant
 #         print(hotel_rooms)
-#     elif choose_room == '2':
+    elif choose_room == '2':
+        print(f'These are the available rooms: {hotel_rooms}')
+
+        enter_room_number = input('Please input room number you would like to fill: ')
+        enter_new_occupant = input('Who would you like to make the new occupant?')
+        enter_new_occupant = name_checker(enter_new_occupant)
+        print(new_occupant(enter_new_occupant, enter_room_number))
+        print(f'new room list: {hotel_rooms}')
+
 #         change_room = input('Please enter room you would like to empty: ')
 #         hotel_rooms[change_room] = ''
 #         print(hotel_rooms)
