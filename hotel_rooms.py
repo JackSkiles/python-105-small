@@ -1,9 +1,5 @@
 import json
-# - Make sure you can 
-#     - put someone in an unoccpied room
-#     - make a room available by setting the occupant name to ''
-#     - check if a room number is valid
-#     - check if a room is occupied or not
+
 file_name = 'bffs.json'
 
 
@@ -80,18 +76,21 @@ def name_checker(occupant_name):
 
 
 def room_vacancy(room_check):
-    #for room_check in hotel_rooms.keys():
     if hotel_rooms[room_check] == '':
         return(f'{room_check} is vacant')
     else:
         return hotel_rooms.get(room_check, 'That is not a valid room entry.')
  
-def new_occupant(new_occupant, room_number):
+def new_occupant_name(new_occupant, room_number):
     hotel_rooms[room_number] = new_occupant
+
+def remove_occupant(checkout):
+    hotel_rooms[checkout] = ''
+
 
 
 while True:
-#    hotel_rooms = {'101': 'Jotaro', '102': 'Joseph', '103': 'kakyoin', '104': 'Avdol', '105': 'Polnereffe', '106': 'Iggy'}
+
     print(main_menu)
 
     choose_room = input('Please enter what you would like to do: ')
@@ -99,34 +98,19 @@ while True:
     if choose_room == '1':
         check_hotel_room2 = input('Please enter room you would like to check if occupied: ')
         print(room_vacancy(check_hotel_room2))
-#         new_room = input('Please enter new room number you would like to create: ')
-#         new_occupant = input('Please enter new occupant of room: ')
-#         hotel_rooms[new_room] = new_occupant
-#         print(hotel_rooms)
+
     elif choose_room == '2':
         print(f'These are the available rooms: {hotel_rooms}')
 
         enter_room_number = input('Please input room number you would like to fill: ')
         enter_new_occupant = input('Who would you like to make the new occupant?')
         enter_new_occupant = name_checker(enter_new_occupant)
-        print(new_occupant(enter_new_occupant, enter_room_number))
+        print(new_occupant_name(enter_new_occupant, enter_room_number))
         print(f'new room list: {hotel_rooms}')
 
-#         change_room = input('Please enter room you would like to empty: ')
-#         hotel_rooms[change_room] = ''
-#         print(hotel_rooms)
-#     elif choose_room == '3':
-#         check_hotel_room = input('Please choose room number you would like to check: ')
-#         print(hotel_rooms.get(check_hotel_room, 'Room is empty'))
-    # elif choose_room == '2':
-    #     check_hotel_room2 = input('Please enter room you would like to check if occupied: ')
-    #     print(hotel_rooms.get(check_hotel_room2, 'room is empty'))
-        #if hotel_rooms[check_hotel_room2]
-#     else:
-#         break
-
-#     # hotel_rooms['104'] = ''
-#     # print(hotel_rooms)
-
-#     # print(hotel_rooms.get('105', 'Nothing there'))
-# print('Thank you for checking hotel rooms!')
+    elif choose_room == '3':
+        check_hotel_room = input('Please choose room number you would like to check out: ')
+        print(f'{hotel_rooms[check_hotel_room]} is checking out.')
+        remove_occupant(check_hotel_room)
+   
+print('Thank you for checking hotel rooms!')
